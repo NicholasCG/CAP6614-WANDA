@@ -1,0 +1,9 @@
+{
+    "started":  "2026-03-14T13:24:10",
+    "sparsity":  0.5,
+    "wanda_repo":  "C:\\Users\\geno\\Desktop\\Tests\\Antigravity\\WandaProject\\wanda",
+    "nsamples":  128,
+    "sequence_length":  2048,
+    "model":  "meta-llama/Llama-2-7b-hf",
+    "dtype":  "float16"
+}

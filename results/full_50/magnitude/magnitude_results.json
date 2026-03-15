@@ -1,0 +1,23 @@
+{
+  "method": "magnitude",
+  "model": "meta-llama/Llama-2-7b-hf",
+  "dtype": "float16",
+  "device": "cuda",
+  "sequence_length": 2048,
+  "perplexity_stride": null,
+  "max_eval_tokens": null,
+  "target_sparsity": 0.5,
+  "dense_perplexity": 5.584498934215779,
+  "pruned_perplexity": 15.774406592774053,
+  "delta_perplexity": 10.189907658558273,
+  "num_pruned_layers": 225,
+  "model_load_seconds": 9.46112871170044,
+  "dense_eval_seconds": 73.80710935592651,
+  "prune_seconds": 18.226203203201294,
+  "pruned_eval_seconds": 3506.528459787369,
+  "total_seconds": 3618.7857687473297,
+  "linear_total_params": 6607077376,
+  "linear_nonzero_params": 3303538688,
+  "linear_zero_params": 3303538688,
+  "linear_sparsity": 0.5
+}
