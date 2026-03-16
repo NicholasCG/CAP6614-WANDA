@@ -86,13 +86,14 @@ class WandaPruner:
             k = int(in_features * self.sparsity)
 
             if k <= 0:
-                mask = torch.ones_like(W)
-            else:
-                prune_idx = torch.topk(score, k=k, dim=1, largest=False).indices
-                mask = torch.ones_like(W)
-                mask.scatter_(1, prune_idx, 0)
+                masks[name] = True
+                continue
 
-            module.weight.data.mul_(mask)
-            masks[name] = mask
+            prune_idx = torch.topk(score, k=k, dim=1, largest=False).indices
+            mask = torch.zeros_like(W, dtype=torch.bool)
+            mask.scatter_(1, prune_idx, True)
+
+            module.weight.data.masked_fill_(mask, 0)
+            masks[name] = True
 
         return masks

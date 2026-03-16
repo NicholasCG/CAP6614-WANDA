@@ -11,17 +11,16 @@ def magnitude_prune_linear_layer(layer, sparsity):
     k = int(in_features * sparsity)
 
     if k <= 0:
-        return torch.ones_like(W)
+        return True
 
     scores = W.abs()
-
     prune_idx = torch.topk(scores, k=k, dim=1, largest=False).indices
 
-    mask = torch.ones_like(W)
-    mask.scatter_(1, prune_idx, 0)
+    mask = torch.zeros_like(W, dtype=torch.bool)
+    mask.scatter_(1, prune_idx, True)
 
-    layer.weight.data.mul_(mask)
-    return mask
+    layer.weight.data.masked_fill_(mask, 0)
+    return True
 
 
 def magnitude_prune_model(model, sparsity):
@@ -33,6 +32,6 @@ def magnitude_prune_model(model, sparsity):
     for name, module in model.named_modules():
         if isinstance(module, torch.nn.Linear):
             mask = magnitude_prune_linear_layer(module, sparsity)
-            masks[name] = mask
+            masks[name] = True
 
     return masks
